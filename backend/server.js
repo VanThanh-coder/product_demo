@@ -8,10 +8,17 @@ const port = 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: [
-      "https://product-demo-lilac-three.vercel.app",
-      "http://localhost:3000",
-    ],
+    origin: (origin, callback) => {
+      const allowed = [
+        "http://localhost:3000",
+        "https://product-demo-lilac-three.vercel.app",
+      ];
+      if (!origin || allowed.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );

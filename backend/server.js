@@ -8,7 +8,10 @@ const port = 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://product-demo-lilac-three.vercel.app/",
+    origin: [
+      "https://product-demo-lilac-three.vercel.app",
+      "http://localhost:3000",
+    ],
     credentials: true,
   })
 );
@@ -44,7 +47,7 @@ app.get("/product", async (req, res) => {
     res.json(rows);
   } catch (error) {
     console.error("❌ Lỗi query:", error.message);
-    res.status(500).json({ message: "Lỗi server" });
+    res.status(500).json({ message: "Lỗi server 123456" });
   }
 });
 
